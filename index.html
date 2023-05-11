@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Лаборотория</title>
+  <script src="https://cdn.jsdelivr.net/npm/vue@2.7.8/dist/vue.js"></script>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Roboto+Slab&display=swap" rel="stylesheet">
+  <style>
+    body {
+      font-family: 'Roboto Slab', serif;
+    }
+    input {
+      font-family: 'Roboto Slab', serif;
+    }
+    button {
+      font-family: 'Roboto Slab', serif;
+    }
+    .list-zv {
+      display: flex;
+      flex-direction: column;
+    }
+    .povod {
+      width: 201px;
+      height: 20px;
+    }
+    .doctors {
+      width: 150px;
+      height: 30px;
+      margin-top: 10px;
+    }
+    .doctor1 {
+      width: 400px;
+      height: 500px;
+      border: 1px solid black;
+      border-radius: 10px;
+      background-color: #E2D5B5;
+    }
+    .doctor2 {
+      width: 400px;
+      height: 500px;
+      border-radius: 10px;
+      border: 1px solid black;
+      margin-left: 20px;
+      background-color: #E2D5B5;
+    }
+    .doctors-container {
+      display: flex;
+    }
+  </style>
+</head>
+<body>
+  <div id="app">
+    <h1>Заявки</h1>
+    <div class="list-zv">
+      <div>
+        <input type="text" v-model="newTodoText" placeholder="Повод обращения" class="povod">
+        <button @click="addTodo" class="knopka">Отправить</button>
+      </div>
+      <select class="doctors" v-model="selectedDoctor">
+        <option value="doctor1">1</option>
+        <option value="doctor2">2</option>
+      </select>
+    </div>
+    <ul>
+      <li v-for="(todo, index) in todosDoctor1" :key="'doctor1-'+index">
+        <input type="checkbox" v-model="todo.done">
+        <span :class="{ done: todo.done }">{{ todo.text }}</span>
+        <button @click="deleteTodo('doctor1', index)">х</button>
+      </li>
+      <li v-for="(todo, index) in todosDoctor2" :key="'doctor2-'+index">
+        <input type="checkbox" v-model="todo.done">
+        <span :class="{ done: todo.done }">{{ todo.text }}</span>
+        <button @click="deleteTodo('doctor2', index)">х</button>
+      </li>
+    </ul>
+  </div>
+  <div class="doctors-container">
+    <div class="doctor1">
+      <ul>
+        <li v-for="(todo, index) in todosDoctor1" :key="'doctor1-'+index">{{ todo.text }}</li>
+      </ul>
+    </div>
+    <div class="doctor2">
+      <ul>
+        <li v-for="(todo, index) in todosDoctor2" :key="'doctor2-'+index">{{ todo.text }}</li>
+      </ul>
+    </div>
+  </div>
+  <script src="script.js"></script>
+</body>
+</html>
